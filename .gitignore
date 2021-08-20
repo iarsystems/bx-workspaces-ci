@@ -1,0 +1,6 @@
+**/Debug
+**/Release
+**/settings
+
+**/*.ewd
+**/*.dep
