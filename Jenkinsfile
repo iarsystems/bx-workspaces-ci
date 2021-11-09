@@ -22,8 +22,9 @@ pipeline {
     BUILD_CONFIGURATION = 'Debug'
   }
   
+  // Update these parameters whenever more artifacts should be kept (/for longer)
   options {
-    buildDiscarder(logRotator(daysToKeepStr: "14", artifactNumToKeepStr: "2"))
+    buildDiscarder(logRotator(daysToKeepStr: "14", artifactNumToKeepStr: "5"))
   }
 
   /* 
