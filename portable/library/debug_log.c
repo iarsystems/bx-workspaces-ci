@@ -6,7 +6,7 @@
 /*!
   \file    debug_log.c
   \brief   Print information for debugging
-  \version 20210511
+  \version 20211109
 */
 
 #include "library.h"

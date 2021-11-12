@@ -4,9 +4,9 @@
 */
 
 /*!
-  \file    main.c
+  \file    componentB.c
   \brief   Component B 
-  \version 20210511
+  \version 20211112
 */
 
 #include "library.h"
@@ -27,7 +27,8 @@ int main()
   mul = math_mul(sum, z);
   debug_log("Mul = %d\r\n", mul);
 
-  debug_log("Finished Execution!\r\n");
+  debug_log("Finished execution!\r\n");
 
   return 0;
 }
+

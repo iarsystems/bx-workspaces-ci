@@ -3,8 +3,7 @@
   See LICENSE for detailed license information.
 */
 
-#include <stdlib.h>
-#include <stdio.h>
+#include "library.h"
 
 void simpleLeakInCycle()
 {
@@ -18,5 +17,5 @@ void simpleLeakInCycle()
   }
 
   /* Repair: put the call to free() inside the cycle. */
-  //free(pointer);
+//  free(pointer);
 }
