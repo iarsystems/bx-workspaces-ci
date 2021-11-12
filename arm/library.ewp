@@ -314,7 +314,7 @@
         </option>
         <option>
           <name>CCIncludePath2</name>
-          <state></state>
+          <state>$PROJ_DIR$/../portable/library</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
