@@ -2075,6 +2075,6 @@
         </settings>
     </configuration>
     <file>
-        <name>$PROJ_DIR$\..\portable\componentA\main.c</name>
+        <name>$PROJ_DIR$\..\portable\componentA\componentA.c</name>
     </file>
 </project>
