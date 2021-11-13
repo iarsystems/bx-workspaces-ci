@@ -22,7 +22,7 @@
   #include <intrinsics.h>
 #endif
 
-#define DATATYPE uint16_t
+#define DATATYPE int32_t
 
 /* Functions */
 DATATYPE math_sum (DATATYPE a, DATATYPE b);

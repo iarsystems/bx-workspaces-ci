@@ -5,30 +5,34 @@
 
 /*!
   \file    componentB.c
-  \brief   Component B 
+  \brief   Component B
   \version 20211112
 */
 
 #include "library.h"
 
+#define FORMAT_MUL_STRING(X) _Generic((X), \
+        uint32_t: "-- %d * %d = %u\r\n",   \
+        default:  "-- %d * %d = %d\r\n"    )
+
 int main()
 {
-  const DATATYPE x = 10000;
+  const DATATYPE x = 45000;
   const DATATYPE y = 20000;
-  const DATATYPE z = 30000;
+  const DATATYPE z = 65000;
         DATATYPE sum;
         DATATYPE mul;
 
-  debug_log("Component B!\r\n");
+  debug_log("Component B!\r\n\n");
 
   sum = math_sum(x, y);
-  debug_log("Sum = %d\r\n", sum);
+  debug_log("-- %d + %d = %d\r\n", x, y, sum);
 
   mul = math_mul(sum, z);
-  debug_log("Mul = %d\r\n", mul);
+  debug_log(FORMAT_MUL_STRING(mul), sum, z, mul);
 
-  debug_log("Finished execution!\r\n");
+  debug_log("\nComponent B - finished execution.\r\n");
 
   return 0;
 }
-
+e
