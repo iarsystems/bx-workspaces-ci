@@ -6,33 +6,37 @@
 /*!
   \file    componentA.c
   \brief   Component A
-  \version 20211112 
+  \version 20211112
 */
 
 #include "library.h"
 
+#if !defined(NDEBUG)
+# define IS_INT32(N) _Generic((N), int32_t: 1, default: 0)
+# define ASSERT_DATATYPE(X,FAILMSG) _Static_assert(IS_INT32(X), FAILMSG)
+#else
+# define ASSERT_DATATYPE(X,FAILMSG)
+#endif
+
 int main()
 {
-  const uint16_t x = 101;
-  const uint16_t y = 202;
-  const uint16_t z = 303;
-        uint16_t sum;
-        uint16_t mul;
-        float    log;
+  const DATATYPE x =  70510;
+  const DATATYPE y = -24170;
+  const DATATYPE z =  46340;
+        DATATYPE sum;
+        DATATYPE mul;
 
-  debug_log("Component A!\r\n");
+  debug_log("Component A!\r\n\n");
 
   sum = math_sum(x, y);
-  debug_log("Sum = %d\r\n", sum);
+  debug_log("-- %d  +  %d = %d\r\n", x ,y, sum);
+  ASSERT_DATATYPE(sum, "FAIL: componentA - sum requires int32_t.");
 
   mul = math_mul(sum, z);
-  debug_log("Mul = %d\r\n", mul);
+  debug_log("-- %d  *   %d = %d\r\n", sum, z, mul);
+  ASSERT_DATATYPE(mul, "FAIL: componentA - mul requires int32_t.");
 
-  log = math_log(2, 16);
-  debug_log("log2(%d) = %f\r\n", 16, log);
-
-  debug_log("Finished execution!\r\n");
+  debug_log("\nComponent A - finished execution.\r\n");
 
   return 0;
 }
-

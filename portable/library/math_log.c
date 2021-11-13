@@ -5,7 +5,7 @@
 
 /*!
   \file    math_log.c
-  \brief   Performs multiplication
+  \brief   Performs logarithm
   \version 20211111
 */
 
@@ -29,9 +29,9 @@ float math_log(DATATYPE b, float n)
       n /= b;
     }
     n = p(n, 10);
-    val = 10*(val + i);
+    val = 10 * (val + i);
     accurate--;
     reps++;
   }
-  return (float)val/p(10,reps);
+  return (float)val / p(10, reps);
 }
