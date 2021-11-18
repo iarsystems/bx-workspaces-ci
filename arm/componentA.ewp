@@ -772,7 +772,7 @@
         </option>
         <option>
           <name>IlinkAdditionalLibs</name>
-          <state></state>
+          <state>$EXE_DIR$\library.a</state>
         </option>
         <option>
           <name>IlinkOverrideProgramEntryLabel</name>
