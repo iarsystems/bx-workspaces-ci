@@ -772,7 +772,7 @@
         </option>
         <option>
           <name>IlinkAdditionalLibs</name>
-          <state>$EXE_DIR$\library.a</state>
+          <state>$EXE_DIR$/library.a</state>
         </option>
         <option>
           <name>IlinkOverrideProgramEntryLabel</name>
@@ -1268,7 +1268,7 @@
         </option>
         <option>
           <name>CCIncludePath2</name>
-          <state></state>
+          <state>$PROJ_DIR$/../portable/library</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -1727,7 +1727,7 @@
         </option>
         <option>
           <name>IlinkAdditionalLibs</name>
-          <state></state>
+          <state>$EXE_DIR$/library.a</state>
         </option>
         <option>
           <name>IlinkOverrideProgramEntryLabel</name>

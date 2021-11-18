@@ -12,10 +12,10 @@
 #include "library.h"
 
 #if !defined(NDEBUG)
-# define IS_INT32(N) _Generic((N), int32_t: 1, default: 0)
-# define ASSERT_DATATYPE(X,FAILMSG) _Static_assert(IS_INT32(X), FAILMSG)
+# define IS_INT32(N)                 _Generic((N), int32_t: 1, default: 0)
+# define ASSERT_DATATYPE(X, FAILMSG) _Static_assert(IS_INT32(X), FAILMSG)
 #else
-# define ASSERT_DATATYPE(X,FAILMSG)
+# define ASSERT_DATATYPE(X, FAILMSG)
 #endif
 
 int main()
@@ -29,7 +29,7 @@ int main()
   debug_log("Component A!\r\n\n");
 
   sum = math_sum(x, y);
-  debug_log("-- %d  +  %d = %d\r\n", x ,y, sum);
+  debug_log("-- %d  +  %d = %d\r\n", x, y, sum);
   ASSERT_DATATYPE(sum, "FAIL: componentA - sum requires int32_t.");
 
   mul = math_mul(sum, z);
@@ -40,3 +40,4 @@ int main()
 
   return 0;
 }
+

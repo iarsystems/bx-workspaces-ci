@@ -1,6 +1,6 @@
 /*
-Copyright (c) 2020-2021, IAR Systems AB.
-See LICENSE for detailed license information.
+  Copyright (c) 2020-2021, IAR Systems AB.
+  See LICENSE for detailed license information.
 */
 
 #include "library.h"
