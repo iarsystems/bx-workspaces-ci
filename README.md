@@ -1,6 +1,6 @@
 # bx-workspaces-ci
 
-A collection of [IAR Embedded Workbench][url-ew] workspaces for experimentation when building projects with the [IAR Build Tools][url-bx] in CI scenarios.
+A collection of [IAR Embedded Workbench][url-ew] workspaces (`.eww`) containing projects (`.ewp`), suitable for experimentation when building with the [IAR Build Tools][url-bx] in CI scenarios.
 
 This repository is used as a [git submodule][url-git-sub] on the CI-related tutorials available at [https://github.com/IARSystems][url-gh].
 
@@ -10,15 +10,18 @@ Currently available ready-made projects:
 | __Architecture__                          | __Minimum version__     |
 | :----------                               | :---------------        |
 | [`arm`][url-ewarm]                        | 8.50.6                  |
-| [`armfs`][url-ewarmfs]                    | 8.50.10                 |
 | [`riscv`][url-ewriscv]                    | 1.40.1                  |
 | [`rh850`][url-ewrh850]                    | 2.21.1                  |
 | [`rl78`][url-ewrl78]                      | 4.21.1                  |
 | [`rx`][url-ewrx]                          | 4.20.1                  |
 
-All these architecture-wise projects rely on the same portable C codebase found in [portable](portable). 
 
->:warning: The code was designed to generate compiler warnings and some rule violations for demonstration purposes.
+All these architecture-wise projects rely on the same portable C sources found in [portable](portable). 
+
+>:warning: The portable C code should build with no errors and no warnings according to the `C Language Standard`.
+
+>:warning: The portable C code was intentionaly designed to generate certain violations when performing `Static Code Analysis with the IAR C-STAT`, for demonstration purposes.
+
 
 <!-- links -->
 [url-ew]:         https://iar.com/products/architectures

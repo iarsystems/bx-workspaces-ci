@@ -9,5 +9,36 @@
     <project>
         <path>$WS_DIR$\componentB.ewp</path>
     </project>
-    <batchBuild />
+    <batchBuild>
+        <batchDefinition>
+            <name>Build ALL - Debug</name>
+            <member>
+                <project>library</project>
+                <configuration>Debug</configuration>
+            </member>
+            <member>
+                <project>componentA</project>
+                <configuration>Debug</configuration>
+            </member>
+            <member>
+                <project>componentB</project>
+                <configuration>Debug</configuration>
+            </member>
+        </batchDefinition>
+        <batchDefinition>
+            <name>Build ALL - Release</name>
+            <member>
+                <project>library</project>
+                <configuration>Release</configuration>
+            </member>
+            <member>
+                <project>componentA</project>
+                <configuration>Release</configuration>
+            </member>
+            <member>
+                <project>componentB</project>
+                <configuration>Release</configuration>
+            </member>
+        </batchDefinition>
+    </batchBuild>
 </workspace>
