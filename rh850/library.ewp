@@ -1643,7 +1643,7 @@
                 </option>
                 <option>
                     <name>IlinkIcfFile</name>
-                    <state>lnk0t.icf</state>
+                    <state>$TOOLKIT_DIR$\config\lnkrh850_g3m.icf</state>
                 </option>
                 <option>
                     <name>IlinkIcfFileSlave</name>
