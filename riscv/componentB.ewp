@@ -369,7 +369,7 @@
                 </option>
                 <option>
                     <name>CCIncludePath2</name>
-                    <state>$PROJ_DIR$\..\portable\library</state>
+                    <state>$PROJ_DIR$/../portable/library</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -628,7 +628,7 @@
                 </option>
                 <option>
                     <name>IlinkOutputFile</name>
-                    <state>componentB.out</state>
+                    <state>$PROJ_FNAME$.out</state>
                 </option>
                 <option>
                     <name>IlinkDebugInfoEnable</name>
@@ -688,11 +688,11 @@
                 </option>
                 <option>
                     <name>IlinkIcfOverride</name>
-                    <state>1</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>IlinkIcfFile</name>
-                    <state>$PROJ_DIR$\generic.icf</state>
+                    <state>$TOOLKIT_DIR$\config\linker\generic.icf</state>
                 </option>
                 <option>
                     <name>IlinkIcfFileSlave</name>
@@ -728,7 +728,7 @@
                 </option>
                 <option>
                     <name>IlinkAdditionalLibs</name>
-                    <state>$EXE_DIR$\library.a</state>
+                    <state>$EXE_DIR$/library.a</state>
                 </option>
                 <option>
                     <name>IlinkOverrideProgramEntryLabel</name>
@@ -975,7 +975,7 @@
                 <debug>0</debug>
                 <option>
                     <name>GDeviceSelect</name>
-                    <state></state>
+                    <state>RV32	RV32</state>
                 </option>
                 <option>
                     <name>GOutputBinary</name>
@@ -1131,11 +1131,11 @@
                 </option>
                 <option>
                     <name>GDeviceXandesdspSlave</name>
-                    <state>1</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>GCoreDevice</name>
-                    <state>###Uninitialized###</state>
+                    <state>RV32IMAFDC</state>
                 </option>
                 <option>
                     <name>RadioStdOutErr</name>
@@ -1256,7 +1256,7 @@
                 </option>
                 <option>
                     <name>OutputFile</name>
-                    <state></state>
+                    <state>$FILE_BNAME$.o</state>
                 </option>
                 <option>
                     <name>CCDefines</name>
@@ -1328,7 +1328,7 @@
                 </option>
                 <option>
                     <name>CCIncludePath2</name>
-                    <state></state>
+                    <state>$PROJ_DIR$/../portable/library</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -1587,7 +1587,7 @@
                 </option>
                 <option>
                     <name>IlinkOutputFile</name>
-                    <state>###Unitialized###</state>
+                    <state>componentB.out</state>
                 </option>
                 <option>
                     <name>IlinkDebugInfoEnable</name>
@@ -1687,7 +1687,7 @@
                 </option>
                 <option>
                     <name>IlinkAdditionalLibs</name>
-                    <state></state>
+                    <state>$EXE_DIR$/library.a</state>
                 </option>
                 <option>
                     <name>IlinkOverrideProgramEntryLabel</name>
