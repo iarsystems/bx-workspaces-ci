@@ -764,7 +764,7 @@
                 </option>
                 <option>
                     <name>IlinkIcfFile</name>
-                    <state>$PROJ_DIR$\lnkrx600.icf</state>
+                    <state></state>
                 </option>
                 <option>
                     <name>IlinkIcfFileSlave</name>
@@ -1799,7 +1799,7 @@
                 </option>
                 <option>
                     <name>IlinkIcfFile</name>
-                    <state>lnk0t.icf</state>
+                    <state></state>
                 </option>
                 <option>
                     <name>IlinkIcfFileSlave</name>
