@@ -8,7 +8,7 @@ set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 
 # Action: Set the `<arch>` to the compiler's target architecture
 # Examples: 430, 8051, arm, avr, riscv, rx, rl78, rh850, stm8 or v850
-set(CMAKE_SYSTEM_PROCESSOR arm) 
+set(CMAKE_SYSTEM_PROCESSOR arm)
 
 # Action: Set the `IAR_INSTALL_DIR` to the tool installation path
 set(IAR_INSTALL_DIR /opt/iarsystems/bx${CMAKE_SYSTEM_PROCESSOR})

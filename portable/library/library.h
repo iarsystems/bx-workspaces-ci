@@ -16,10 +16,10 @@
 #include <stdlib.h>
 #include <string.h>
 #if !defined(NDEBUG)
-  #include <stdio.h>
+# include <stdio.h>
 #endif
 #if defined(__IAR_SYSTEMS_ICC__)
-  #include <intrinsics.h>
+# include <intrinsics.h>
 #endif
 
 #define DATATYPE int32_t

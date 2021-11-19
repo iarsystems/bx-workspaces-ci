@@ -27,12 +27,12 @@ add_executable(componentA
 
 target_link_libraries(componentA LINK_PUBLIC library)
 target_link_options(componentA PRIVATE
-  $<$<CONFIG:Debug>:--debug_lib --redirect ___write=___write_buffered> 
+  $<$<CONFIG:Debug>:--debug_lib --redirect ___write=___write_buffered>
   # The `SHELL:` prefix prevents option de-duplication
-  "SHELL:--config_def CSTACK_SIZE=0x1000" 
-  "SHELL:--config_def   HEAP_SIZE=0x1000" 
+  "SHELL:--config_def CSTACK_SIZE=0x1000"
+  "SHELL:--config_def   HEAP_SIZE=0x1000"
   # Set the linker script
-  --config "${TOOLKIT_DIR}/config/linker/SiFive/hifive1.icf" ) 
+  --config "${TOOLKIT_DIR}/config/linker/SiFive/hifive1.icf" )
 
 
 # Component B
@@ -42,9 +42,9 @@ add_executable(componentB
 
 target_link_libraries(componentB LINK_PUBLIC library)
 target_link_options(componentB PRIVATE
-  $<$<CONFIG:Debug>:--debug_lib --redirect ___write=___write_buffered> 
+  $<$<CONFIG:Debug>:--debug_lib --redirect ___write=___write_buffered>
   # The `SHELL:` prefix prevents option de-duplication
-  "SHELL:--config_def CSTACK_SIZE=0x2000" 
-  "SHELL:--config_def   HEAP_SIZE=0x2000" 
+  "SHELL:--config_def CSTACK_SIZE=0x2000"
+  "SHELL:--config_def   HEAP_SIZE=0x2000"
   # Set the linker script
-  --config "${TOOLKIT_DIR}/config/linker/SiFive/e34arty.icf" ) 
+  --config "${TOOLKIT_DIR}/config/linker/SiFive/e34arty.icf" )

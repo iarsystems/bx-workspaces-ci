@@ -27,7 +27,7 @@ add_executable(componentA
 
 target_link_libraries(componentA LINK_PUBLIC library)
 target_link_options(componentA PRIVATE
-  $<$<CONFIG:Debug>:--debug_lib --redirect ___write=___write_buffered --config_def __RESERVE_OCD_ROM=1> 
+  $<$<CONFIG:Debug>:--debug_lib --redirect ___write=___write_buffered --config_def __RESERVE_OCD_ROM=1>
   # The `SHELL:` prefix prevents option de-duplication
   "SHELL:--config_def _STACK_SIZE=128"
   "SHELL:--config_def _NEAR_HEAP_SIZE=512"
@@ -37,7 +37,7 @@ target_link_options(componentA PRIVATE
   "SHELL:--config_def _NEAR_CONST_LOCATION_START=0x2000"
   "SHELL:--config_def _NEAR_CONST_LOCATION_SIZE=0x6F00"
   # Set the linker script
-  --config "${TOOLKIT_DIR}/config/lnkrl78_s2.icf" ) 
+  --config "${TOOLKIT_DIR}/config/lnkrl78_s2.icf" )
 
 
 # Component B
@@ -47,7 +47,7 @@ add_executable(componentB
 
 target_link_libraries(componentB LINK_PUBLIC library)
 target_link_options(componentB PRIVATE
-  $<$<CONFIG:Debug>:--debug_lib --redirect ___write=___write_buffered --config_def __RESERVE_OCD_ROM=1> 
+  $<$<CONFIG:Debug>:--debug_lib --redirect ___write=___write_buffered --config_def __RESERVE_OCD_ROM=1>
   # The `SHELL:` prefix prevents option de-duplication
   "SHELL:--config_def _STACK_SIZE=256"
   "SHELL:--config_def _NEAR_HEAP_SIZE=1024"
@@ -57,4 +57,4 @@ target_link_options(componentB PRIVATE
   "SHELL:--config_def _NEAR_CONST_LOCATION_START=0x3000"
   "SHELL:--config_def _NEAR_CONST_LOCATION_SIZE=0x6F00"
   # Set the linker script
-  --config "${TOOLKIT_DIR}/config/lnkrl78_s3.icf" ) 
+  --config "${TOOLKIT_DIR}/config/lnkrl78_s3.icf" )
