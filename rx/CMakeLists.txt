@@ -27,13 +27,13 @@ add_executable(componentA
 
 target_link_libraries(componentA LINK_PUBLIC library)
 target_link_options(componentA PRIVATE
-  $<$<CONFIG:Debug>:--debug_lib --redirect ___write=___write_buffered> 
+  $<$<CONFIG:Debug>:--debug_lib --redirect ___write=___write_buffered>
   # The `SHELL:` prefix prevents option de-duplication
   "SHELL:--config_def _USTACK_SIZE=0x800"
   "SHELL:--config_def _ISTACK_SIZE=0x800"
   "SHELL:--config_def   _HEAP_SIZE=0x200"
   # Set the linker script
-  --config "${TOOLKIT_DIR}/config/lnkr5f563ne.icf" ) 
+  --config "${TOOLKIT_DIR}/config/lnkr5f563ne.icf" )
 
 
 # Component B
@@ -43,10 +43,10 @@ add_executable(componentB
 
 target_link_libraries(componentB LINK_PUBLIC library)
 target_link_options(componentB PRIVATE
-  $<$<CONFIG:Debug>:--debug_lib --redirect ___write=___write_buffered> 
+  $<$<CONFIG:Debug>:--debug_lib --redirect ___write=___write_buffered>
   # The `SHELL:` prefix prevents option de-duplication
   "SHELL:--config_def _USTACK_SIZE=0x800"
   "SHELL:--config_def _ISTACK_SIZE=0x800"
   "SHELL:--config_def   _HEAP_SIZE=0x100"
   # Set the linker script
-  --config "${TOOLKIT_DIR}/config/lnkr5f563ne.icf" ) 
+  --config "${TOOLKIT_DIR}/config/lnkr5f563ne.icf" )
