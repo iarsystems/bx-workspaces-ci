@@ -24,7 +24,7 @@ pipeline {
   
   // Update these parameters whenever more artifacts should be kept (/for longer)
   options {
-    buildDiscarder(logRotator(daysToKeepStr: "14", artifactNumToKeepStr: "5"))
+    buildDiscarder(logRotator(daysToKeepStr: "14", artifactNumToKeepStr: "20"))
   }
 
   /* 
