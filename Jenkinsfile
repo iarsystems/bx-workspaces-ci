@@ -20,14 +20,14 @@ pipeline {
     }
 		
     stage('Build: Library') {
-			steps {
-				sh '/opt/iarsystems/bxarm/common/bin/iarbuild arm/library.ewp -build Release'
+      steps {
+        sh '/opt/iarsystems/bxarm/common/bin/iarbuild arm/library.ewp -build Release'
       }
     }
     stage('Build: Component A') {
-			steps {
-				sh '/opt/iarsystems/bxarm/common/bin/iarbuild arm/componentA.ewp -build Release'
-			}
+      steps {
+        sh '/opt/iarsystems/bxarm/common/bin/iarbuild arm/componentA.ewp -build Release'
+      }
     }
     stage('Build: Component B') {
       steps {
@@ -37,32 +37,32 @@ pipeline {
 		
     stage('Analysis: Library') {
       steps {
-				sh '/opt/iarsystems/bxarm/common/bin/iarbuild arm/library.ewp -cstat_analyze Release'
+        sh '/opt/iarsystems/bxarm/common/bin/iarbuild arm/library.ewp -cstat_analyze Release'
       }
     }
-		stage('Analysis: Component A') {
+    stage('Analysis: Component A') {
       steps {
-				sh '/opt/iarsystems/bxarm/common/bin/iarbuild arm/library.ewp -cstat_analyze Release'
+        sh '/opt/iarsystems/bxarm/common/bin/iarbuild arm/library.ewp -cstat_analyze Release'
       }
     }
-		stage('Analysis: Component B') {
-			steps {
-				sh '/opt/iarsystems/bxarm/common/bin/iarbuild arm/componentB.ewp -cstat_analyze Release'
-			}
+    stage('Analysis: Component B') {
+      steps {
+        sh '/opt/iarsystems/bxarm/common/bin/iarbuild arm/componentB.ewp -cstat_analyze Release'
+      }
     }
   }
 
-	post {
-		always {
-			echo 'This will always execute at the pipeline ending.'
-			sh '/opt/iarsystems/bxarm/arm/bin/icstat --db arm/Release/C-STAT/cstat.db load'
-			recordIssues(tools: [iar(), iarCstat()])			
-		}
-		failure {
-			echo 'This will execute when one or more pipeline stages fail.'
-		}
-		success {
-			echo 'This will execute when all pipeline stages are succesful.'
-		}
-	}
+  post {
+    always {
+      echo 'This will always execute at the pipeline ending.'
+      sh '/opt/iarsystems/bxarm/arm/bin/icstat --db arm/Release/C-STAT/cstat.db load'
+      recordIssues(tools: [iar(), iarCstat()])			
+    }
+    failure {
+      echo 'This will execute when one or more pipeline stages fail.'
+    }
+    success {
+      echo 'This will execute when all pipeline stages are succesful.'
+    }
+  }
 }
