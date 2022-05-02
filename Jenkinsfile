@@ -5,57 +5,69 @@
 
 pipeline {
   agent {
+    /* The Docker image: change it according to your needs. */
     docker { 
       image 'iarsystems/bxarm:9.20.4' 
-      args '-v LMS2:/usr/local/etc/IARSystems --hostname bxarm-build-agent-1'
+      args '-v LMS2:/usr/local/etc/IARSystems --hostname ${NODE_NAME}'
     }
+  }
+
+  /* The environment: change it according to your needs. */
+  environment {
+    BX_ARCH        = 'arm'
+    BX_INSTALL_DIR = "/opt/iarsystems/bx${env.BX_ARCH}"
+    BX_BUILD_CFG   = 'Release'  
   }
 	
   stages {
     stage('Test compiler') {
       steps {
         echo 'If this stage fails, it is likely there is a license issue.'
-        sh '/opt/iarsystems/bxarm/arm/bin/iccarm --version'
+        sh '${BX_INSTALL_DIR}/${BX_ARCH}/bin/icc${BX_ARCH} --version'
       }
     }
-		
+    
+    /* Build stages */
     stage('Build: Library') {
       steps {
-        sh '/opt/iarsystems/bxarm/common/bin/iarbuild arm/library.ewp -build Release'
+        sh '${BX_INSTALL_DIR}/common/bin/iarbuild ${BX_ARCH}/library.ewp -build ${BX_BUILD_CFG}'
       }
     }
     stage('Build: Component A') {
       steps {
-        sh '/opt/iarsystems/bxarm/common/bin/iarbuild arm/componentA.ewp -build Release'
+        sh '${BX_INSTALL_DIR}/common/bin/iarbuild ${BX_ARCH}/componentA.ewp -build ${BX_BUILD_CFG}'
       }
     }
     stage('Build: Component B') {
       steps {
-        sh '/opt/iarsystems/bxarm/common/bin/iarbuild arm/componentB.ewp -build Release'
+        sh '${BX_INSTALL_DIR}/common/bin/iarbuild ${BX_ARCH}/componentB.ewp -build ${BX_BUILD_CFG}'
       }
     }
 		
+    /* Analysis stages */
     stage('Analysis: Library') {
       steps {
-        sh '/opt/iarsystems/bxarm/common/bin/iarbuild arm/library.ewp -cstat_analyze Release'
+        sh '${BX_INSTALL_DIR}/common/bin/iarbuild ${BX_ARCH}/library.ewp -cstat_analyze ${BX_BUILD_CFG}'
       }
     }
     stage('Analysis: Component A') {
       steps {
-        sh '/opt/iarsystems/bxarm/common/bin/iarbuild arm/library.ewp -cstat_analyze Release'
+        sh '${BX_INSTALL_DIR}/common/bin/iarbuild ${BX_ARCH}/componentA.ewp -cstat_analyze ${BX_BUILD_CFG}'
       }
     }
     stage('Analysis: Component B') {
       steps {
-        sh '/opt/iarsystems/bxarm/common/bin/iarbuild arm/componentB.ewp -cstat_analyze Release'
+        sh '${BX_INSTALL_DIR}/common/bin/iarbuild ${BX_ARCH}/componentB.ewp -cstat_analyze ${BX_BUILD_CFG}'
       }
     }
   }
 
+  /* Post stages */
   post {
     always {
       echo 'This will always execute at the pipeline ending.'
-      sh '/opt/iarsystems/bxarm/arm/bin/icstat --db arm/Release/C-STAT/cstat.db load'
+      /* Load the C-STAT warnings for the recordIssues() function from the warnings-ng plugin */
+      sh '${BX_INSTALL_DIR}/${BX_ARCH}/bin/icstat --db ${BX_ARCH}/Release/C-STAT/cstat.db load'
       recordIssues(tools: [iar(), iarCstat()])			
     }
     failure {
