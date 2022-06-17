@@ -64,6 +64,7 @@ pipeline {
       echo 'This will always execute at the pipeline ending.'
       /* Load the C-STAT warnings for the recordIssues() function from the warnings-ng plugin */
       sh '${BX_INSTALL_DIR}/${BX_ARCH}/bin/icstat --db ${PROJ_DIR}/${CONFIG_NAME}/C-STAT/cstat.db load'
+      recordIssues(tools: [iar(), iarCstat()])
     }
     failure {
       echo 'This will execute when one or more pipeline stages fail.'
