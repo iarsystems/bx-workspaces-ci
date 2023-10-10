@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2021-2022 IAR Systems AB.
+  Copyright (c) 2021-2023 IAR Systems AB.
   See LICENSE for detailed license information.
 */
 
@@ -7,8 +7,8 @@ pipeline {
   agent {
     /* The Docker image: change it according to your needs. */
     docker { 
-      image 'iarsystems/bxarm:9.20.4' 
-      args '-v LMS2:/usr/local/etc/IARSystems --hostname ${NODE_NAME}'
+      image 'iarsystems/bxarm:9.40.2'
+      args '-v LMS2:/usr/local/etc/IARSystems -e HOME=${WORKSPACE} --hostname ${NODE_NAME}'
     }
   }
   /* The environment: change it according to your needs. */
