@@ -7,7 +7,7 @@ pipeline {
   agent {
     /* The Docker image: change it according to your needs. */
     docker { 
-      image 'iarsystems/bxarm:9.40.2'
+      image 'iarsystems/bxarm:9.50.1'
       args '-v LMS2:/usr/local/etc/IARSystems -e HOME=${WORKSPACE} --hostname ${NODE_NAME}'
     }
   }
