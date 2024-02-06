@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspace>
+    <project>
+        <path>$WS_DIR$\..\targets\rx\library.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\targets\rx\test-crc16.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\..\targets\rx\test-crc32.ewp</path>
+    </project>
+    <batchBuild>
+        <batchDefinition>
+            <name>Build ALL - Debug</name>
+            <member>
+                <project>library</project>
+                <configuration>Debug</configuration>
+            </member>
+            <member>
+                <project>test-crc16</project>
+                <configuration>Debug</configuration>
+            </member>
+            <member>
+                <project>test-crc32</project>
+                <configuration>Debug</configuration>
+            </member>
+        </batchDefinition>
+        <batchDefinition>
+            <name>Build ALL - Release</name>
+        </batchDefinition>
+    </batchBuild>
+</workspace>

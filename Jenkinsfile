@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2021-2023 IAR Systems AB.
+  Copyright (c) 2021-2024 IAR Systems AB.
   See LICENSE for detailed license information.
 */
 
@@ -13,48 +13,48 @@ pipeline {
   }
   /* The environment: change it according to your needs. */
   environment {
-    BX_ARCH        = 'arm'
-    BX_INSTALL_DIR = "/opt/iarsystems/bx${BX_ARCH}"
-    PROJ_DIR       = "${BX_ARCH}"
-    CONFIG_NAME    = 'Release'
+    BX_BINDIR      = "/opt/iarsystems/bxarm/arm/bin"
+    BX_COMMON      = "/opt/iarsystems/bxarm/common/bin"
+    TARGET_DIR     = "targets/arm"
+    BUILD_TYPE     = 'Release'
   }
   stages {
     stage('Test compiler') {
       steps {
         echo 'If this stage fails, it is likely there is a license issue.'
-        sh '${BX_INSTALL_DIR}/${BX_ARCH}/bin/icc${BX_ARCH} --version'
+        sh '${BX_BINDIR}/icc`basename ${TARGET_DIR}` --version'
       }
     }
     /* Build stages */
-    stage('Build: Library') {
+    stage('Build: library') {
       steps {
-        sh '${BX_INSTALL_DIR}/common/bin/iarbuild ${PROJ_DIR}/library.ewp -build ${CONFIG_NAME}'
+        sh '${BX_COMMON}/iarbuild ${TARGET_DIR}/library.ewp -build ${BUILD_TYPE}'
       }
     }
-    stage('Build: Component A') {
+    stage('Build: test-crc16') {
       steps {
-        sh '${BX_INSTALL_DIR}/common/bin/iarbuild ${PROJ_DIR}/componentA.ewp -build ${CONFIG_NAME}'
+        sh '${BX_COMMON}/iarbuild ${TARGET_DIR}/test-crc16.ewp -build ${BUILD_TYPE}'
       }
     }
-    stage('Build: Component B') {
+    stage('Build: test-crc32') {
       steps {
-        sh '${BX_INSTALL_DIR}/common/bin/iarbuild ${PROJ_DIR}/componentB.ewp -build ${CONFIG_NAME}'
+        sh '${BX_COMMON}/iarbuild ${TARGET_DIR}/test-crc32.ewp -build ${BUILD_TYPE}'
       }
     }
     /* Analysis stages */
-    stage('Analyze: Library') {
+    stage('Analyze: library') {
       steps {
-        sh '${BX_INSTALL_DIR}/common/bin/iarbuild ${PROJ_DIR}/library.ewp -cstat_analyze ${CONFIG_NAME}'
+        sh '${BX_COMMON}/iarbuild ${TARGET_DIR}/library.ewp -cstat_analyze ${BUILD_TYPE}'
       }
     }
-    stage('Analyze: Component A') {
+    stage('Analyze: test-crc16') {
       steps {
-        sh '${BX_INSTALL_DIR}/common/bin/iarbuild ${PROJ_DIR}/componentA.ewp -cstat_analyze ${CONFIG_NAME}'
+        sh '${BX_COMMON}/iarbuild ${TARGET_DIR}/test-crc16.ewp -cstat_analyze ${BUILD_TYPE}'
       }
     }
-    stage('Analyze: Component B') {
+    stage('Analyze: test-crc32') {
       steps {
-        sh '${BX_INSTALL_DIR}/common/bin/iarbuild ${PROJ_DIR}/componentB.ewp -cstat_analyze ${CONFIG_NAME}'
+        sh '${BX_COMMON}/iarbuild ${TARGET_DIR}/test-crc32.ewp -cstat_analyze ${BUILD_TYPE}'
       }
     }
   }
@@ -63,7 +63,7 @@ pipeline {
     always {
       echo 'This will always execute at the pipeline ending.'
       /* Load the C-STAT warnings for the recordIssues() function from the warnings-ng plugin */
-      sh '${BX_INSTALL_DIR}/${BX_ARCH}/bin/icstat --db ${PROJ_DIR}/${CONFIG_NAME}/C-STAT/cstat.db load'
+      sh '${BX_BINDIR}/icstat --db ${TARGET_DIR}/${BUILD_TYPE}/C-STAT/cstat.db load'
       recordIssues(tools: [iar(), iarCstat()])
     }
     failure {
