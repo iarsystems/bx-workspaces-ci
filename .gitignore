@@ -1,5 +1,12 @@
-**/Debug
-**/Release
-**/settings
+# The following files and folders are going to be ignored in this repository
 
-**/*.dep
+# Build folders
+Debug/
+Release/
+settings/
+
+# VSCode is not used here
+.vscode/
+
+# Dependency list (older IDEs)
+*.dep

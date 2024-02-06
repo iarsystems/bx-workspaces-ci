@@ -1,83 +1,83 @@
-# bx-workspaces-ci
+# IAR Embedded Workbench Workspaces for CI
+A collection of [IAR Embedded Workbench][url-ew] workspaces (`.eww`) containing example projects (`.ewp`), suitable for experimentation when building pre-existing projects with the [IAR Build Tools][url-bx] within CI (Continuous Integration) scenarios.
 
-### Description
+This repository is used in many CI-related tutorials available [@IAR][url-gh] where it is mentioned. After going through one of such tutorials, you should have this repository imported into your private Git server.
 
-A collection of [IAR Embedded Workbench][url-ew] workspaces (`.eww`) containing example projects (`.ewp`), suitable for experimentation when building with the [IAR Build Tools][url-bx] within CI (Continuous Integration) scenarios.
+## Introduction
+When working in development teams or on reasonably big code bases it is not uncommon that modifications made on shared sources clashes and the projects start showing coding defects. There are many ways in which this can happen.
 
-This repository is used in many CI-related tutorials available [@IARSystems][url-gh] where it is mentioned.
+A common practice in such environments is to adopt a CI system which will evolve with your projects and will also help you on spotting problems before the production code base gets broken.
 
-For each supported target architecture, there are 3 projects:
-- library.ewp
-- componentA.ewp
-- componentB.ewp
+## Software requirements
+For the widest backward compatibility, the supplied projects were all created using earlier versions of the **IAR Embedded Workbench**:
 
-All the projects rely on the same portable C sources found in [portable](portable). 
+| __Target Architecture__      | __Version__      |
+| :--------------------------- | :--------------- |
+| [`arm`][url-ewarm]           | 8.50.6           |
+| [`avr`][url-ewavr]           | 8.10.1           |
+| [`riscv`][url-ewriscv]       | 1.40.1           |
+| [`rh850`][url-ewrh850]       | 2.21.1           |
+| [`rl78`][url-ewrl78]         | 4.21.1           |
+| [`rx`][url-ewrx]             | 4.20.1           |
 
->:bulb: The portable C code should build with no errors and no warnings according to the __C Language Standard__.
-
->:warning: The portable C code was intentionaly designed to generate certain violations when performing __Static Code Analysis with the IAR C-STAT__, for demonstration purposes.
-
-
-### Required versions
-The minimum versions for the IAR Build Tools in which the projects (`.ewp`) will build when using __iarbuild__ are:
-
-| __Target Architecture__       | __Minimum version__ |
-| :----------                   | :---------------    |
-| [`arm`][url-ewarm]            | 8.50.6              |
-| [`riscv`][url-ewriscv]        | 1.40.1              |
-| [`rh850`][url-ewrh850]        | 2.21.1              |
-| [`rl78`][url-ewrl78]          | 4.21.1              |
-| [`rx`][url-ewrx]              | 4.20.1              |
+So that they can be used with any version of the **IAR Build Tools**. Newer versions will automatically upgrade the project and create a backup copy.
 
 
-## Preventing build breakages
-When working with bigger teams on bigger code bases it is not uncommon that modifications on shared resources clashes and the build becomes broken. There are many ways in which this can happen.
+## Description
+In this repository source code tree, you will find workspaces with project examples for the target architectures supported in the IAR Build Tools.
 
-After finishing a CI-related tutorial from [@IARSystems][url-gh], you should have this repository imported into your Git server. Now you can simulate an event where newly introduced code breaks the build and in which CI system will help you on spotting where it got broken.
+### Project structure
+In the `workspace` directory you will find a workspace file named after its related product's codename:
+```
+📁 workspace
+ ┣ 📄 ewarm.eww
+ ┣ 📄 ewavr.eww
+ ┣ 📄 ewriscv.eww
+ ┣ 📄 ewrh850.eww
+ ┣ 📄 ewrl78.eww
+ ┗ 📄 ewrx.eww
+```
 
-### Development Environment
-For a project that is developed using Git for its version control, an external Git client (e.g. [Git for Windows](https://gitforwindows.org/), [TortoiseGit](https://tortoisegit.org/), [GitHub Desktop](https://desktop.github.com/), [Sourcetree](https://www.sourcetreeapp.com/), etc.) can be used alongside the __IAR Embedded Workbench IDE__.
+Those workspaces includes projects found within the `target` directory:
+```
+📁 targets
+ ┣ 📁 arm
+ ┃  ┣ 📄 library.ewp 
+ ┃  ┣ 📄 test-crc16.ewp
+ ┃  ┗ 📄 test-crc32.ewp
+ ┣ 📁 avr
+ ┣ 📁 riscv
+ ┣ 📁 rh850
+ ┣ 📁 rl78
+ ┗ 📁 rx
+```
 
->:bulb: Alternatively it is possible to use [Visual Studio Code](https://code.visualstudio.com/) which comes with an
-integrated Git client alongisde suitable extensions.
+### Notes regarding the projects source code
+The supplied example projects use portable C sources compliant with the C Language Standard. While such sources can be compiled with the IAR C/C++ Compiler without generating any diagnostic messages (warnings/errors), the C Language Standard comes with undefined behaviors which are, in most cases, unsuitable for embedded applications. For that reason it is highly recommended to use static code analyzers which can help in shipping embedded applications with the professional robustness they deserve. **IAR C-STAT** is an static analysis tool which is offered as an add-on to the compiler. The source code in the projects was designed to purposedly generate coding standard violations, for C-STAT demonstration purposes.
 
-<!-- the [iar-vsc-build]() and the [iar-vsc-debug]() extensions. -->
+### Development Environment (Desktop)
+While the IAR Embedded Workbench IDE doesn't come with an embedded Git client, it is possible to use a 3rd party client of your choice. If you need some suggestions:
+* [TortoiseGit](https://tortoisegit.org/) -- (article: [TortoiseGit integration for Embedded Workbench IDE users](https://github.com/felipe-iar/ew-tortoise-integration))
+* [GitHub Desktop](https://desktop.github.com/)
+* [Sourcetree](https://www.sourcetreeapp.com/)
+* [Git for Windows](https://gitforwindows.org/)
+Alternatively IAR provides a set of [extensions](https://marketplace.visualstudio.com/publishers/iarsystems) for [Visual Studio Code](https://code.visualstudio.com/) which comes with an embedded git client.
 
-### Preparing the projects for development
+### Cloning for development
+1. Clone the bx-workspaces-ci from your private repository where you have the __IAR Embedded Workbench__ installed.
+2. Select the corresponding `workspaces/ew<target>.eww` workspace for your product's target architecture and open it.
+3. Make sure the projects build with no errors: go to __Project__ → __Batch build...__ (<kbd>F8</kbd>) and press the `  Make  ` button.
 
-1. Use the Git client of your choice to clone the repository from your private Git server which is monitored by your CI controller to your Windows Desktop where there is an instance of the corresponding __IAR Embedded Workbench IDE__ installed.
-2. In the __IAR Embedded Workbench__, open the corresponding `<arch>/workspace.eww` file for the target architecture in use.
-3. Right-click on each project in the workspace and choose __Make__. All the 3 projects should build with no errors.
-
-### Creating a new feature for component B
-At some point the __componentB__ required a change in which its `DATATYPE` had to change from `int32_t` to `uint32_t` for holding values greater than `0x7FFF_FFFF`.
-
-1. Using your git client, checkout a feature branch. (e.g. __dev-componentB__).
-2. Right-click on the __componentB__ project and __Set as Active__.
-3. Unfold the __componentB__ project tree and double-click on its __componentB.c__ file so it will open in the code editor.
-4. On the line that reads `#include "library.h"`, right-click kand choose __Open "library.h"__.
-5. Find `#define DATATYPE int32_t` and replace it with `#define DATATYPE uint32_t`.
-6. Rebuild the __library__ project. It should build with no errors.
-7. Rebuild the __componentB__. It should build with no errors.
-
->:bulb: Optionally you can use the IAR C-SPY Debugger to debug __componentB__.
-
-### Pushing the changes to the project's repository
-Once we're satisfied with the changes
-1. Commit all changes to the local git repository.
-2. Push the __dev-componentB__ branch back to the git origin.
-
-### What happened?
-Going back to the CI controller, changes performed to the git origin repository should have been automatically detected.
-
-Has the pipeline succeeded?
-
-The change we have performed worked for __componentB__ although, as the __library__ was a shared asset, this change compromised __componentA__. As we were focused on developing __componentB__, we completely forgot about other parts of a bigger system.
-
-From the reports provided by automated pipeline in the CI controller, it is possible to spot which changes might cause the build to break, preventing them from being merged into the production branch.
+### A new feature-request has arrived
+When a new feature (or bug fix) is scheduled, the Git workflow usually uses what is called a "feature branch". Generally the procedure below should apply.
+1. Using your git client, checkout a new  feature branch (e.g., `dev-feat-x`).
+2. Perform the required changes to the project to comply with the new feature requeest.
+3. Build and test the project locally.
+4. Commit the changes to the local cloned repository.
+5. Push the `dev-feat-x` branch to the git remote repository (e.g., `origin`).
 
 ## Conclusion
-This was only one very simple example. There are so many other ways for breaking builds. You're going to naturally discover them during your actual development journey. The CI infrastructure of your choice should help you to be focused on your work and then to figure out if anything else gets broken upon changes to the code. With a proper infrastructure for automated workflows, your organization will be able to spot issues in the broader spectrum faster, while delivering better results in the long run.
+This was only one very simple set of example projects. In real applications, as the complexity raises, lurking defects might end up in tragedies if not discovered and remedied during the earliest development stages. Having a CI system will help the whole team in detecting and preventing potentially catastrophic incidents. Conducting tests within automated workflows will certainly reduce costs and raise the overall code quality, from which the whole organization can benefit.
 
 
 <!-- links -->
@@ -86,6 +86,7 @@ This was only one very simple example. There are so many other ways for breaking
 [url-gh]:         https://github.com/iarsystems 
 [url-git-sub]:    https://git-scm.com/docs/git-submodule 
 [url-ewarm]:      https://iar.com/ewarm
+[url-ewavr]:      https://iar.com/ewavr
 [url-ewarmfs]:    https://iar.com/products/requirements/functional-safety/iar-embedded-workbench-for-arm-functional-safety
 [url-ewriscv]:    https://iar.com/ewriscv
 [url-ewrh850]:    https://iar.com/ewrh850
